@@ -9,7 +9,7 @@ Puppet::Reports.register_report(:ehpas) do
     based on the prescense of 'ehpas' tag in the log messages.
     Hacking up the tagmail report processor to suit our purposes."
 
-  emails = 'jeremy@puppetlabs.com'
+  emails = ['jeremy@puppetlabs.com']
   taglists = ['ehpas']
 
   # Find all matching messages.
