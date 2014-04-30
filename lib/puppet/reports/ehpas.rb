@@ -8,9 +8,13 @@ Puppet::Reports.register_report(:ehpas) do
   desc "Process reports in EHPAS format
     based on the prescense of 'ehpas' tag in the log messages.
     Hacking up the tagmail report processor to suit our purposes."
-
-  emails = ['jeremy@puppetlabs.com']
-  taglists = ['ehpas']
+  # emails
+  e = ['jeremy@puppetlabs.com']
+  # positive matches
+  p = ['ehpas']
+  # negative matches
+  n = []
+  taglists = [e,p,n]
 
   # Find all matching messages.
   def match(taglists)
@@ -58,7 +62,6 @@ Puppet::Reports.register_report(:ehpas) do
       return
     end
 
-    taglists = parse(File.read(Puppet[:tagmap]))
 
     # Now find any appropriately tagged messages.
     reports = match(taglists)
