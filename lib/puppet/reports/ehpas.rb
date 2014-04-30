@@ -14,7 +14,6 @@ Puppet::Reports.register_report(:ehpas) do
   pos = ['ehpas']
   # negative matches
   neg = []
-  taglists = [emails, pos, neg]
 
   # Find all matching messages.
   def match(taglists)
@@ -50,18 +49,15 @@ Puppet::Reports.register_report(:ehpas) do
 
   # Process the report.  This just calls the other associated messages.
   def process
-    unless Puppet::FileSystem.exist?(Puppet[:tagmap])
-      Puppet.notice "Cannot send tagmail report; no tagmap file #{Puppet[:tagmap]}"
-      return
-    end
 
     metrics = raw_summary['resources'] || {} rescue {}
 
     if metrics['out_of_sync'] == 0 && metrics['changed'] == 0
-      Puppet.notice "Not sending tagmail report; no changes"
+      Puppet.notice "Not sending ehpas email report; no changes"
       return
     end
 
+    taglists = [emails, pos, neg]
 
     # Now find any appropriately tagged messages.
     reports = match(taglists)
