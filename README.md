@@ -8,3 +8,6 @@ example:
 ```
 reports = console,puppetdb,ehpas
 ```
+
+Use the ehpas tag on your resources and voila!
+
