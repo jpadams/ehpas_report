@@ -4,9 +4,11 @@ require 'pp'
 require 'net/smtp'
 require 'time'
 
+EMAIL = ['jeremy@puppetlabs.com']
+
 Puppet::Reports.register_report(:ehpas) do
   desc "Process reports in EHPAS format
-    based on the prescense of 'ehpas' tag in the log messages.
+    based on the presence of 'ehpas' tag in the log messages.
     Hacking up the tagmail report processor to suit our purposes."
 
   # Find all matching messages.
@@ -45,7 +47,8 @@ Puppet::Reports.register_report(:ehpas) do
     taglists = []
     pos = ['ehpas']
     neg = []
-    emails = ['jeremy@puppetlabs.com'] 
+    #emails = ['jeremy@puppetlabs.com'] 
+    emails = EMAIL
     taglists << [emails, pos, neg]
     taglists
   end
